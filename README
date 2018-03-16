@@ -23,4 +23,9 @@ To produce output do the following in the terminal:
 compile
 LQguser
 
+-----------------------------------------------------------------------------------------------------------------------------
+Using eic-smear to create standardized ROOT trees from LQGENEP output
 
+The folder eic-smear-lqgenep contains a copy of eic-smear-1.0.3 with modification to work with LQGENEP output: LQGENEP creates Pythia6 format output files whch eic-smear can handle. However, since eic-smear was developed for DIS events, it looks for a final state lepton to calculate event kinematics and crashes if it does not find such a lepton. We commented the respective line in eic-smear-lqgenep/src/erhic/EventFactory.cxx to make it work with leptoquark events:
+
+// mEvent->GetTrack(n)->ComputeEventDependentQuantities(*mEvent);
