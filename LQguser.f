@@ -61,7 +61,7 @@ C...LQGENEP event informations
          close(22)
 
 c     set output file name
-         out_file = 'Quick_Test.txt'
+         out_file = 'LQGENEP_output.txt'
          
 c     set random seed
          MRPY(1) = 1*10000
