@@ -1,3 +1,13 @@
+# LQGENEP
+
+This repository builds a Dockefile with LQGENEP, which can then be run with singularity.
+
+docker build --platform linux/386 --tag ghcr.io/wdconinc/lqgenep .
+docker push ghcr.io/wdconinc/lqgenep
+singularity run docker://ghcr.io/wdconinc/lqgenep
+
+-----------------------------------------------------------------------------------------------------------------------------
+
 inputfile Parameters:
 
 number of events, Leptoquark mass, lepton beam energy, proton beam energy, initial quark generation, final quark generation
