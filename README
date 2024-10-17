@@ -14,6 +14,23 @@ Output lepton flavor
 Initial and final state coupling
 x and Q2 ranges
 
+
+Leptoquark types are defined in the lqgenep.f data block `LQCHA`:
+1: 'S_0L'
+2: 'S_0R'
+3: '~S_0R'
+4: 'S_1L'
+5: 'V_1/2L'
+6: 'V_1/2R'
+7: '~V_1/2L'
+8: 'V_0L'
+9: 'V_0R'
+10: '~V_0R'
+11: 'V_1L'
+12: 'S_1/2L'
+13: 'S_1/2R'
+14: '~S_1/2L'
+
 -----------------------------------------------------------------------------------------------------------------------------
 
 To run program change inputfile paramaters. Then compile which creates executable LQguser object file. Run LQguser to create outputfile with leptoquark events.
