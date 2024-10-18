@@ -36,20 +36,20 @@ The `inputfile` parameters are whitespace separate:
 ## Leptoquark types:
 
 Leptoquark types are defined in the lqgenep.f data block `LQCHA`:
-1: 'S_0L'
-2: 'S_0R'
-3: '~S_0R'
-4: 'S_1L'
-5: 'V_1/2L'
-6: 'V_1/2R'
-7: '~V_1/2L'
-8: 'V_0L'
-9: 'V_0R'
-10: '~V_0R'
-11: 'V_1L'
-12: 'S_1/2L'
-13: 'S_1/2R'
-14: '~S_1/2L'
+1. 'S_0L'
+2. 'S_0R'
+3. '~S_0R'
+4. 'S_1L'
+5. 'V_1/2L'
+6. 'V_1/2R'
+7. '~V_1/2L'
+8. 'V_0L'
+9. 'V_0R'
+10. '~V_0R'
+11. 'V_1L'
+12. 'S_1/2L'
+13. 'S_1/2R'
+14. '~S_1/2L'
 
 
 -----------------------------------------------------------------------------------------------------------------------------
@@ -82,13 +82,3 @@ At this point the Distill_pi.C file may be run in order to select only LQ event 
 -----------------------------------------------------------------------------------------------------------------------------
 
 To read Pythia text output into a root tree format use Build_Tree.C with the proper input file and number of events.
-
------------------------------------------------------------------------------------------------------------------------------
-Using eic-smear to create standardized ROOT trees from LQGENEP output
-
-The folder eic-smear-lqgenep contains a copy of eic-smear-1.0.3 with modification to work with LQGENEP output: LQGENEP creates Pythia6 format output files whch eic-smear can handle. However, since eic-smear was developed for DIS events, it looks for a final state lepton to calculate event kinematics and crashes if it does not find such a lepton. We commented the respective line in eic-smear-lqgenep/src/erhic/EventFactory.cxx to make it work with leptoquark events:
-
-// mEvent->GetTrack(n)->ComputeEventDependentQuantities(*mEvent);
-
------------------------------------------------------------------------------------------------------------------------------
-
