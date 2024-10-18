@@ -1,0 +1,6 @@
+*.hepmc
+*.histo
+*.root
+*.sif
+*.txt
+fort.*
