@@ -24,7 +24,8 @@
      >  ptnt,phnt,ptt,pht,pth,phh,
      >  ppnt,ppt,pph,
      >  ptx,pty,ptz,phx,phy,phz,
-     >  ptid,phid,ppid,pxid,pyid,pzid,lam
+     >  ptid,phid,ppid,pxid,pyid,pzid,lam,
+     >  q2min
 
       integer lqtype,Nevt,qi,qj,iproc,id,
      > Nevtdown,Nevtup
@@ -56,12 +57,13 @@ C...LQGENEP event informations
       
       OPEN(UNIT=22,FILE='inputfile',STATUS='OLD')
 
-         Read(22,*)Nevt,Mass,beampar(2),beampar(3),
-     >    qi,qj
+         Read(22,*)Nevt,Mass,lqtype,beampar(2),beampar(3),
+     >    q2min,xmin,xmax,ymin,ymax,qi,qj
+         Read(22,*)out_file
          close(22)
 
 c     set output file name
-         out_file = 'LQGENEP_output.txt'
+c         out_file = 'LQGENEP_output.txt'
          
 c     set random seed
          MRPY(1) = 1*10000
@@ -96,7 +98,7 @@ c      beampar(3)=820.   ! HERA
 * to 401, first value available for external processes)  
       lqgpar1(5)=iproc
 * LQ type
-      lqgpar2(1)=14
+      lqgpar2(1)=lqtype
 * generation of the input quark in the s-channel process 
       lqgpar2(2)=qi
 * generation of the output quark in the s-channel process 
@@ -111,15 +113,15 @@ c      beampar(3)=820.   ! HERA
 *                               the two couplings should be the same) 
       lqgpar3(3)=0.3
 * x range low limit
-      lqgpar3(4)=0.011
+      lqgpar3(4)=xmin
 * x range high limit
-      lqgpar3(5)=1.
+      lqgpar3(5)=xmax
 * y range low limit
-      lqgpar3(6)=0.1
+      lqgpar3(6)=ymin
 * y range high limit
-      lqgpar3(7)=1.       
+      lqgpar3(7)=ymax
 * minimum allowed Q^2 in Gev^2
-      lqgpar3(8)=1000.
+      lqgpar3(8)=q2min
 * Parton distribution type according to PDFLIB      
       lqgpar3(9)=1.       
 * Parton distribution group according to PDFLIB      
