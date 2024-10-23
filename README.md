@@ -50,35 +50,3 @@ Leptoquark types are defined in the lqgenep.f data block `LQCHA`:
 12. 'S_1/2L'
 13. 'S_1/2R'
 14. '~S_1/2L'
-
-
------------------------------------------------------------------------------------------------------------------------------
-
-LQguser.f:
-
-Main program that calls LQGENEP and sets many important parameters including:
-
-Output file name with event list
-Leptoquark type
-Output lepton flavor
-Initial and final state coupling
-x and Q2 ranges
-
-
------------------------------------------------------------------------------------------------------------------------------
-
-To run program change inputfile paramaters. Then compile which creates executable LQguser object file. Run LQguser to create outputfile with leptoquark events.
-To produce output do the following in the terminal:
-
-compile
-LQguser
-
-This output is default set to LQGENEP_output.txt
-
------------------------------------------------------------------------------------------------------------------------------
-
-At this point the Distill_pi.C file may be run in order to select only LQ event where the tau decays into three pions. This will output a new root file that is exclusively three pion decay taus.
-
------------------------------------------------------------------------------------------------------------------------------
-
-To read Pythia text output into a root tree format use Build_Tree.C with the proper input file and number of events.
