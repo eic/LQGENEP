@@ -1,0 +1,47 @@
+# Dockerfile for 64-bit LQGENEP build
+# This builds LQGENEP with 64-bit support using compatibility layer
+#
+# Build with:
+#   docker build -f Dockerfile.64bit -t lqgenep:64bit .
+#
+# Run with:
+#   docker run --rm -v $PWD:/work -w /work lqgenep:64bit
+
+FROM ubuntu:22.04
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    gfortran \
+    g++ \
+    make \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Optional: Install LHAPDF6 for better PDF support
+# Uncomment these lines to use LHAPDF instead of simple PDF
+# RUN apt-get update && apt-get install -y \
+#     wget \
+#     ca-certificates \
+#     && wget --secure-protocol=auto https://lhapdf.hepforge.org/downloads/?f=LHAPDF-6.5.4.tar.gz -O LHAPDF-6.5.4.tar.gz \
+#     && echo "b9e37bb684e32d3738e8e95c6f4befb1eb7ca8ec8b52c44c2e3db9e5d7a45c10  LHAPDF-6.5.4.tar.gz" | sha256sum -c - \
+#     && tar xzf LHAPDF-6.5.4.tar.gz \
+#     && cd LHAPDF-6.5.4 \
+#     && ./configure --prefix=/usr/local \
+#     && make -j$(nproc) \
+#     && make install \
+#     && cd .. \
+#     && rm -rf LHAPDF-6.5.4 LHAPDF-6.5.4.tar.gz \
+#     && apt-get remove -y wget \
+#     && apt-get autoremove -y \
+#     && apt-get clean \
+#     && rm -rf /var/lib/apt/lists/*
+
+# Copy source files
+COPY . /LQGENEP
+
+# Build LQGENEP
+WORKDIR /LQGENEP
+RUN make 64bit
+
+# Set entrypoint
+ENTRYPOINT ["/LQGENEP/LQguser"]
