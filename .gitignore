@@ -2,7 +2,12 @@
 *.histo
 *.root
 *.sif
-*.txt
 fort.*
 LQguser_test
 LQguser
+LQguser_32bit
+*.o
+*.mod
+output_*.txt
+inputfile_compare
+events_*.tmp

@@ -41,18 +41,24 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y gfortran
+          sudo apt-get install -y gfortran g++ make
       
-      - name: Build 64-bit binary (placeholder)
+      - name: Build 64-bit binary
         run: |
-          echo "64-bit build will be implemented after replacing CERNLIB dependencies"
-          # gfortran -o LQguser LQguser.f lqgenep.f extrafiles/pythia6156.f
-        continue-on-error: true
+          make 64bit
       
-      - name: Run 64-bit test (placeholder)
+      - name: Run 64-bit test
         run: |
-          echo "64-bit tests will be enabled after porting is complete"
-        continue-on-error: true
+          ./test_compare.sh 10
+          
+      - name: Upload 64-bit output
+        uses: actions/upload-artifact@v4
+        with:
+          name: output-64bit
+          path: |
+            output_64bit.txt
+            *.histo
+          if-no-files-found: warn
 
   compare-outputs:
     name: Compare 32-bit and 64-bit outputs
@@ -78,9 +84,23 @@ jobs:
       
       - name: Compare outputs
         run: |
-          echo "Output comparison will be implemented once 64-bit build is working"
+          echo "Comparing 32-bit and 64-bit outputs..."
+          echo ""
           if [ -f output-32bit/LQGENEP_output.txt ]; then
-            echo "32-bit output exists"
+            echo "32-bit output sample:"
             head -20 output-32bit/LQGENEP_output.txt || true
+            echo ""
+          else
+            echo "⚠ 32-bit output not found"
           fi
+          
+          if [ -f output-64bit/output_64bit.txt ]; then
+            echo "64-bit output sample:"
+            head -20 output-64bit/output_64bit.txt || true
+            echo ""
+          else
+            echo "⚠ 64-bit output not found"
+          fi
+          
+          echo "Note: Numerical differences are expected due to different PDF implementations"
         continue-on-error: true

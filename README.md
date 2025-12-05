@@ -1,11 +1,25 @@
 # LQGENEP
 
-This repository builds a LQGENEP container image from a Dockefile, which can then be run with singularity.
+This repository builds a LQGENEP container image from a Dockerfile, which can then be run with singularity.
+
+**NEW**: LQGENEP now supports both 32-bit and 64-bit systems! See [README_64BIT.md](README_64BIT.md) for details.
 
 ## Quickstart
 
-To build and publish the container:
+### 64-bit Build (Recommended for Modern Systems)
+```bash
+# Build directly with Make
+make 64bit
+./LQguser
+
+# Or build Docker image
+docker build -f Dockerfile.64bit --tag ghcr.io/eic/lqgenep:64bit .
+docker run --rm -v $PWD:/work -w /work ghcr.io/eic/lqgenep:64bit
 ```
+
+### 32-bit Build (Legacy)
+To build and publish the legacy 32-bit container:
+```bash
 docker build --platform linux/386 --tag ghcr.io/eic/lqgenep .
 docker push ghcr.io/eic/lqgenep
 ```
