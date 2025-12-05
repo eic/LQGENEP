@@ -17,7 +17,7 @@
       DOUBLE PRECISION UPV, DNV, USEA, DSEA, STR, CHM, BOT, TOP, GL
       
 *     Local variables
-      DOUBLE PRECISION QREF, LAMBDA, T, ALPHAS
+      DOUBLE PRECISION QREF, LAMBDA, T, ALPHAS, QUSE
       DOUBLE PRECISION AU, BU, CU, DU, AD, BD, CD, DD
       DOUBLE PRECISION ASEA, BSEA, CSEA, AGLU, BGLU, CGLU
       DOUBLE PRECISION XUPV, XDNV, XSEA, XGLU
@@ -41,12 +41,14 @@
          RETURN
       ENDIF
       
-      IF (Q .LT. LAMBDA) THEN
-         Q = LAMBDA
+*     Use local variable to avoid modifying input parameter
+      QUSE = Q
+      IF (QUSE .LT. LAMBDA) THEN
+         QUSE = LAMBDA
       ENDIF
       
 *     Simple LO evolution parameter
-      T = LOG(LOG(Q**2 / LAMBDA**2) / LOG(QREF**2 / LAMBDA**2))
+      T = LOG(LOG(QUSE**2 / LAMBDA**2) / LOG(QREF**2 / LAMBDA**2))
       
 *     Valence quark parameterizations
 *     u valence: roughly 2:1 ratio to d valence
@@ -85,14 +87,14 @@
       STR = 0.5D0 * XSEA / X
       
 *     Heavy flavors (charm threshold at ~1.5 GeV)
-      IF (Q .GT. 1.5D0) THEN
+      IF (QUSE .GT. 1.5D0) THEN
          CHM = 0.05D0 * XSEA / X
       ELSE
          CHM = 0.0D0
       ENDIF
       
 *     Bottom (threshold at ~4.5 GeV)
-      IF (Q .GT. 4.5D0) THEN
+      IF (QUSE .GT. 4.5D0) THEN
          BOT = 0.01D0 * XSEA / X
       ELSE
          BOT = 0.0D0

@@ -10,6 +10,8 @@
 #ifdef USE_LHAPDF
 #include "LHAPDF/LHAPDF.h"
 
+// Note: LQGENEP is single-threaded, so these globals are safe
+// For multi-threaded use, add proper synchronization
 static LHAPDF::PDF* current_pdf = nullptr;
 static std::string current_pdfname = "";
 

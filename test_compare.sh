@@ -105,12 +105,20 @@ if [ -f "${OUTPUT_32}" ] && [ -f "${OUTPUT_64}" ]; then
     fi
     echo ""
     
-    # Show first event from each
+    # Show first event from each (with error handling)
     echo "Sample event (first event, particle 8):"
     echo "32-bit:"
-    grep "^    8 " ${OUTPUT_32} | head -1 || echo "  (not found)"
+    if grep -q "^    8 " ${OUTPUT_32} 2>/dev/null; then
+        grep "^    8 " ${OUTPUT_32} | head -1
+    else
+        echo "  (not found)"
+    fi
     echo "64-bit:"
-    grep "^    8 " ${OUTPUT_64} | head -1 || echo "  (not found)"
+    if grep -q "^    8 " ${OUTPUT_64} 2>/dev/null; then
+        grep "^    8 " ${OUTPUT_64} | head -1
+    else
+        echo "  (not found)"
+    fi
     echo ""
     
     # Cleanup
